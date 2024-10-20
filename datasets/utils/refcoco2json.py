@@ -1,6 +1,6 @@
 import os
 import json
-from refer import REFER
+from .refer import REFER
 
 coco_root = '/pth/to/coco'
 ref_root = '/pth/to/refcocoseg'

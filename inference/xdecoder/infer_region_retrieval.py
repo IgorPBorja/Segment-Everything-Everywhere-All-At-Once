@@ -20,14 +20,14 @@ import cv2
 import torch
 from torchvision import transforms
 
-from utils.arguments import load_opt_command
+from ...utils.arguments import load_opt_command
 
 from detectron2.data import MetadataCatalog
-from modeling.language.loss import vl_similarity
-from modeling.BaseModel import BaseModel
-from modeling import build_model
-from utils.visualizer import Visualizer
-from utils.distributed import init_distributed
+from ...modeling.language.loss import vl_similarity
+from ...modeling.BaseModel import BaseModel
+from ...modeling import build_model
+from ...utils.visualizer import Visualizer
+from ...utils.distributed import init_distributed
 
 logger = logging.getLogger(__name__)
 

@@ -15,19 +15,19 @@ from torch.utils.data import DataLoader
 from typing import Tuple, Dict, List, Union
 from infinibatch import iterators
 
-from trainer.default_trainer import DefaultTrainer
+from ..trainer.default_trainer import DefaultTrainer
 
 from detectron2.evaluation import inference_on_dataset
 from detectron2.utils.logger import log_every_n_seconds
 from detectron2.data import MetadataCatalog
 
-from modeling import build_model
-from modeling.utils import get_class_names
-from modeling.BaseModel import BaseModel
-from datasets import build_evaluator, build_eval_dataloader, build_train_dataloader
-from utils.distributed import is_main_process
-from utils.constants import COCO_PANOPTIC_CLASSES
-from trainer.utils.misc import move_batch_to_device, cast_batch_to_half
+from ..modeling import build_model
+from ..modeling.utils import get_class_names
+from ..modeling.BaseModel import BaseModel
+from ..datasets import build_evaluator, build_eval_dataloader, build_train_dataloader
+from ..utils.distributed import is_main_process
+from ..utils.constants import COCO_PANOPTIC_CLASSES
+from ..trainer.utils.misc import move_batch_to_device, cast_batch_to_half
 
 from .utils.misc import hook_metadata, hook_switcher, hook_opt
 

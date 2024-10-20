@@ -18,17 +18,18 @@ import whisper
 import numpy as np
 
 from gradio import processing_utils
-from modeling.BaseModel import BaseModel
-from modeling import build_model
-from utils.distributed import init_distributed
-from utils.arguments import load_opt_from_config_files
-from utils.constants import COCO_PANOPTIC_CLASSES
+from pathlib import Path
+from ...modeling.BaseModel import BaseModel
+from ...modeling import build_model
+from ...utils.distributed import init_distributed
+from ...utils.arguments import load_opt_from_config_files
+from ...utils.constants import COCO_PANOPTIC_CLASSES
 
-from demo.seem.tasks import *
+from ...demo.seem.tasks import *
 
 def parse_option():
     parser = argparse.ArgumentParser('SEEM Demo', add_help=False)
-    parser.add_argument('--conf_files', default="configs/seem/focall_unicl_lang_demo.yaml", metavar="FILE", help='path to config file', )
+    parser.add_argument('--conf_files', default=str(Path(__file__).parents[1] / "configs/seem/focall_unicl_lang_demo.yaml"), metavar="FILE", help='path to config file', )
     cfg = parser.parse_args()
     return cfg
 
@@ -42,12 +43,12 @@ opt = init_distributed(opt)
 # META DATA
 cur_model = 'None'
 if 'focalt' in cfg.conf_files:
-    pretrained_pth = os.path.join("seem_focalt_v0.pt")
+    pretrained_pth = os.path.join(str(Path(__file__).parents[1]), "seem_focalt_v0.pt")
     if not os.path.exists(pretrained_pth):
         os.system("wget {}".format("https://huggingface.co/xdecoder/SEEM/resolve/main/seem_focalt_v0.pt"))
     cur_model = 'Focal-T'
 elif 'focal' in cfg.conf_files:
-    pretrained_pth = os.path.join("seem_focall_v0.pt")
+    pretrained_pth = os.path.join(str(Path(__file__).parents[1]), "seem_focall_v0.pt")
     if not os.path.exists(pretrained_pth):
         os.system("wget {}".format("https://huggingface.co/xdecoder/SEEM/resolve/main/seem_focall_v0.pt"))
     cur_model = 'Focal-L'
@@ -141,11 +142,11 @@ gr.Interface(
         ),
     ],
     examples=[
-    ["demo/seem/examples/corgi1.webp", ["Text"], "demo/seem/examples/corgi2.jpg", "The corgi.", None, None],
-    ["demo/seem/examples/river1.png", ["Text", "Audio"], "demo/seem/examples/river2.png", "The green trees.", "demo/seem/examples/river1.wav", None],
-    ["demo/seem/examples/zebras1.jpg", ["Example"], "demo/seem/examples/zebras2.jpg", "", None, None],
-    ["demo/seem/examples/fries1.png", ["Example"], "demo/seem/examples/fries2.png", "", None, None],
-    ["demo/seem/examples/placeholder.png", ["Video"], "demo/seem/examples/ref_vase.JPG", "", None, "demo/seem/examples/vasedeck.mp4"],
+    # ["demo/seem/examples/corgi1.webp", ["Text"], "demo/seem/examples/corgi2.jpg", "The corgi.", None, None],
+    # ["demo/seem/examples/river1.png", ["Text", "Audio"], "demo/seem/examples/river2.png", "The green trees.", "demo/seem/examples/river1.wav", None],
+    # ["demo/seem/examples/zebras1.jpg", ["Example"], "demo/seem/examples/zebras2.jpg", "", None, None],
+    # ["demo/seem/examples/fries1.png", ["Example"], "demo/seem/examples/fries2.png", "", None, None],
+    # ["demo/seem/examples/placeholder.png", ["Video"], "demo/seem/examples/ref_vase.JPG", "", None, "demo/seem/examples/vasedeck.mp4"],
     ],
     title=title,
     description=description,

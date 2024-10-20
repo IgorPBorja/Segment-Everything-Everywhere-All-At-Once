@@ -19,15 +19,15 @@ np.random.seed(2)
 import torch
 from torchvision import transforms
 
-from utils.arguments import load_opt_command
+from ...utils.arguments import load_opt_command
 
 from detectron2.data import MetadataCatalog
 from detectron2.structures import BitMasks
-from modeling.BaseModel import BaseModel
-from modeling import build_model
+from ...modeling.BaseModel import BaseModel
+from ...modeling import build_model
 from detectron2.utils.colormap import random_color
-from utils.visualizer import Visualizer
-from utils.distributed import init_distributed
+from ...utils.visualizer import Visualizer
+from ...utils.distributed import init_distributed
 
 logger = logging.getLogger(__name__)
 
